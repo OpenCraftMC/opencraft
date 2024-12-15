@@ -65,8 +65,14 @@ void renderFrame() {
 }
 
 int main() {
-    initOpenGL();
+    #ifdef EMSCRIPTEN
+        emscripten_set_canvas_size(800, 600);
+    #endif
+
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     
+    initOpenGL();
+
 #ifdef EMSCRIPTEN
     emscripten_set_main_loop(renderFrame, 0, 1);
 #else
