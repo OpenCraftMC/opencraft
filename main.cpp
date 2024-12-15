@@ -69,7 +69,7 @@ int main() {
         emscripten_set_canvas_size(800, 600);
     #endif
 
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
     
     initOpenGL();
 
