@@ -1,13 +1,24 @@
+# CMakeLists.txt
+
 cmake_minimum_required(VERSION 3.10)
-project(OpenCraft)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/dist)
+# Set the project name
+project(MultiPlatformApp)
 
-file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.c")
-file(GLOB_RECURSE HEADERS "src/*.h" "src/*.hpp")
-
+# Find the OpenGL package
 find_package(OpenGL REQUIRED)
 
-add_executable(OpenCraft ${SOURCES} ${HEADERS})
+# Find the BGFX package
+set(BGFX_DIR /usr/local/bgfx.cmake)
+add_subdirectory(${BGFX_DIR} ${CMAKE_BINARY_DIR}/bgfx)
 
-target_link_libraries(OpenCraft OpenGL::GL)
+# Add the executable
+add_executable(MultiPlatformApp src/main.cpp)
+
+# Link the libraries
+target_link_libraries(MultiPlatformApp
+    PRIVATE
+    bgfx
+    bimg
+    bx
+    ${OPENGL_LIBRARIES})

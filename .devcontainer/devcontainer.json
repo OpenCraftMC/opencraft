@@ -1,23 +1,36 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/cpp
 {
-	"name": "C++",
+    "name": "Multi-Platform C++ Development",
 
-	"features": {
-		"ghcr.io/devcontainers/features/desktop-lite:1.2.5": {}
-	},
+    "features": {
+        "ghcr.io/devcontainers/features/desktop-lite:1.2.5": {}
+    },
 
-	"build": {
-		"dockerfile": "Dockerfile"
-	},
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
 
-	"runArgs": ["--shm-size=1g"],
-	"forwardPorts": [6080],
-	"portsAttributes": {
-		"6080": {
-			"label": "desktop"
-		}
-	},
+    "runArgs": ["--shm-size=1g"],
+    "forwardPorts": [6080],
+    "portsAttributes": {
+        "6080": {
+            "label": "desktop"
+        }
+    },
 
-	"remoteUser": "root"
+    "remoteUser": "developer",
+
+    "customizations": {
+        "vscode": {
+			"settings": {
+				"terminal.integrated.shell.linux": "/bin/bash"
+			},
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cmake-tools",
+                "ms-azuretools.vscode-docker"
+            ]
+        }
+    },
+
+    "postCreateCommand": "cmake -S . -B build && cmake --build build"
 }
